@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;400;500&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>Flash Card Game</title>
   </head>
@@ -11,27 +17,33 @@
     <div class="container">
       <h1>Flash Card Game</h1>
       <section id="buttons">
+        <button id="add-deck">Add Deck</button>
         <button class="btn" id="start">Start Game</button>
         <button class="btn" id="stop">Stop Game</button>
         <button class="btn" id="show-deck">Show Deck</button>
       </section>
       <section id="active-card">
+        <!-- Add deck -->
         <div class="add-deck active">
           <h3>Add to Deck</h3>
-          <label for="word-input">Word</label>
-          <input type="text" id="word-input" />
-          <label for="definition-input">Definition</label>
-          <textarea id="definition-input" cols="0" rows="10"></textarea>
+          <form action="" id="deck-form">
+            <label for="english-word-input">English Word</label>
+            <input type="text" id="english-word-input" />
+            <label for="translated-word-input">Translated Word</label>
+            <input type="text" id="translated-word-input" />
+            <button type="submit">Add to Deck</button>
+          </form>
         </div>
+        <!--  -->
         <div class="review">
           <h3>Review</h3>
-          <p id="word">Word</p>
+          <p id="english-word">English Word</p>
           <p>=</p>
-          <p id="definition">Definition</p>
+          <p id="translated-word">Translated Word</p>
         </div>
         <div id="quiz">
           <h3>Quiz</h3>
-          <p id="quiz-word">Word</p>
+          <p id="quiz-word">English Word</p>
           <form action="">
             <input type="radio" id="answer-1" name="answer" value="1" />
             <label for="answer-1">Answer 1</label>
@@ -41,7 +53,7 @@
             <label for="answer-3">Answer 3</label>
             <input type="radio" id="answer-4" name="answer" />
             <label for="answer-4">Answer 4</label>
-            <button type="submit">Submit</button>
+            <button class="btn btn-small" type="submit">Submit</button>
           </form>
         </div>
       </section>
@@ -54,7 +66,16 @@
           <button id="reset">Reset Deck</button>
         </div>
       </section>
-      <section id="deck"></section>
+      <section id="deck">
+        <h3>My Cards</h3>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+      </section>
       <section id="score">
         <h3>Score</h3>
         <h4>9/10</h4>
