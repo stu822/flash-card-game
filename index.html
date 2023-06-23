@@ -17,22 +17,26 @@
     <div class="container">
       <h1>Flash Card Game</h1>
       <section id="buttons">
-        <button id="add-deck">Add Deck</button>
+        <button id="add-deck-btn">Add Deck</button>
         <button class="btn" id="start">Start Game</button>
         <button class="btn" id="stop">Stop Game</button>
         <button class="btn" id="show-deck">Show Deck</button>
       </section>
       <section id="active-card">
+        <div class="starting-card active">
+          <h3>Please add cards to deck</h3>
+        </div>
         <!-- Add deck -->
-        <div class="add-deck active">
+        <div class="add-deck">
           <h3>Add to Deck</h3>
           <form action="" id="deck-form">
             <label for="english-word-input">English Word</label>
-            <input type="text" id="english-word-input" />
+            <input type="text" id="english-word-input" required />
             <label for="translated-word-input">Translated Word</label>
-            <input type="text" id="translated-word-input" />
+            <input type="text" id="translated-word-input" required />
             <button type="submit">Add to Deck</button>
           </form>
+          <button id="finish-deck">Finish</button>
         </div>
         <!--  -->
         <div class="review">
@@ -60,7 +64,7 @@
       <section id="deck-info">
         <div>
           <h3>Cards in Deck</h3>
-          <h4>12</h4>
+          <h4 id="card-count">0</h4>
         </div>
         <div>
           <button id="reset">Reset Deck</button>
