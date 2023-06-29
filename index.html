@@ -20,10 +20,10 @@
         <button id="add-deck-btn">Add Deck</button>
         <button class="btn" id="start">Start Game</button>
         <button class="btn" id="stop">Stop Game</button>
-        <button class="btn" id="show-deck">Show Deck</button>
+        <button class="btn" id="review-deck">Review Deck</button>
       </section>
       <section id="active-card">
-        <div class="starting-card active">
+        <div class="starting-card">
           <h3>Please add cards to deck</h3>
         </div>
         <!-- Add deck -->
@@ -36,15 +36,20 @@
             <input type="text" id="translated-word-input" required />
             <button type="submit">Add to Deck</button>
           </form>
-          <button id="finish-deck">Finish</button>
+          <button id="finish-deck" disabled>Finish</button>
         </div>
-        <!--  -->
-        <div class="review">
+        <!-- Review Cards -->
+        <div class="review active">
           <h3>Review</h3>
-          <p id="english-word">English Word</p>
+          <p id="review-english">English Word</p>
           <p>=</p>
-          <p id="translated-word">Translated Word</p>
+          <p id="review-translated">Translated Word</p>
+          <div>
+            <button id="review-prev">Previous Card</button>
+            <button id="review-next">Next Card</button>
+          </div>
         </div>
+        <!-- Card Quiz -->
         <div id="quiz">
           <h3>Quiz</h3>
           <p id="quiz-word">English Word</p>
