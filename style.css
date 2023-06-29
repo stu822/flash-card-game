@@ -1,0 +1,7 @@
+#active-card > div {
+  display: none;
+}
+
+#active-card .active {
+  display: block;
+}
