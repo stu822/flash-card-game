@@ -1,4 +1,21 @@
-const deck = [];
+const deck = [
+  {
+    english: "Hello",
+    translated: "Hola",
+  },
+  {
+    english: "Dog",
+    translated: "El Perro",
+  },
+  {
+    english: "Weather",
+    translated: "El Tiempo",
+  },
+  {
+    english: "Beach",
+    translated: "La Playa",
+  },
+];
 const cardCount = document.querySelector("#card-count");
 const deckForm = document.querySelector("#deck-form");
 const finishDeckBtn = document.querySelector("#finish-deck");
@@ -43,15 +60,16 @@ deckForm.addEventListener("submit", function (e) {
   cardCount.textContent = deck.length;
 });
 
-finishDeckBtn.addEventListener("click", function () {
-  if (deck !== []) {
-    displayReview();
-  }
-});
+// finishDeckBtn.addEventListener("click", function () {
+//   if (deck !== []) {
+//     displayReview();
+//   }
+// });
 
 addDeckBtn.addEventListener("click", () => {
   addDeckCard.classList.add("active");
   startingCard.classList.remove("active");
+  reviewCard.classList.remove("active");
   quizCard.classList.remove("active");
 });
 
@@ -76,6 +94,8 @@ startGamebtn.addEventListener("click", function () {
   quizCard.classList.add("active");
   cardIdx = [];
   score = 0;
+  correctAnswer.textContent = "";
+  finalScore.textContent = "";
   const oldSelections = document.querySelectorAll("#selections div");
   for (let i = 0; i < oldSelections.length; i++) {
     oldSelections[i].remove();
@@ -123,6 +143,7 @@ finishGameBtn.addEventListener("click", function () {
   finalScore.textContent = `You got ${score} out of ${
     deck.length
   }, or ${Math.round((score / deck.length) * 100)}% correct`;
+  correctAnswer.textContent = "";
 });
 // Functions
 function displayReview() {

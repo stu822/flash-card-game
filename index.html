@@ -17,73 +17,133 @@
     <title>Flash Card Game</title>
   </head>
   <body>
-    <div class="container">
-      <h1 class="display-3 text-center">Flash Card Game</h1>
+    <div class="container vh-100">
+      <div class="row d-flex vh-100 justify-content-center pt-4">
+        <h1 class="display-3 text-center col-12">Flash Card Game</h1>
 
-      <section id="active-card">
-        <div class="starting-card">
-          <h3>Please add cards to deck</h3>
-        </div>
-        <!-- Add deck -->
-        <div class="add-deck">
-          <h3>Add to Deck</h3>
-          <form action="" id="deck-form">
-            <label for="english-word-input">English Word</label>
-            <input type="text" id="english-word-input" required />
-            <label for="translated-word-input">Translated Word</label>
-            <input type="text" id="translated-word-input" required />
-            <button type="submit">Add to Deck</button>
-          </form>
-          <button id="finish-deck" disabled>Finish</button>
-        </div>
-        <!-- Review Cards -->
-        <div class="review">
-          <h3>Review</h3>
-          <p id="review-english">English Word</p>
-          <p>=</p>
-          <p id="review-translated">Translated Word</p>
-          <div>
-            <button id="review-prev">Previous Card</button>
-            <button id="review-next">Next Card</button>
+        <div class="col-10">
+          <div class="card">
+            <section class="card-body" id="active-card">
+              <div class="starting-card text-center active">
+                <h3 class="card-title h3 bs-danger-text-emphasis">
+                  Please add cards to deck
+                </h3>
+              </div>
+              <!-- Add deck -->
+              <div class="add-deck">
+                <h3>Add to Deck</h3>
+                <form action="" id="deck-form">
+                  <div class="mb-3">
+                    <label class="form-label" for="english-word-input"
+                      >English Word</label
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="english-word-input"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label" for="translated-word-input"
+                      >Translated Word</label
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="translated-word-input"
+                      required
+                    />
+                  </div>
+
+                  <button class="btn btn-primary" type="submit">
+                    Add to Deck
+                  </button>
+                </form>
+                <!-- <button id="finish-deck" disabled>Finish</button> -->
+              </div>
+              <!-- Review Cards -->
+              <div class="review">
+                <h3 class="text-center">Review</h3>
+                <p class="text-center display-6" id="review-english">
+                  English Word
+                </p>
+                <hr />
+                <p class="text-center display-6" id="review-translated">
+                  Translated Word
+                </p>
+                <div class="btn-group">
+                  <button class="btn btn-outline-primary" id="review-prev">
+                    Previous Card
+                  </button>
+                  <button class="btn btn-outline-primary" id="review-next">
+                    Next Card
+                  </button>
+                </div>
+              </div>
+              <!-- Card Quiz -->
+              <div class="quiz">
+                <h3>Quiz</h3>
+                <p id="quiz-word" class="display-6 text-center">English Word</p>
+                <hr />
+                <div class="row">
+                  <form id="quiz-form" action="" class="col-6">
+                    <div id="selections"></div>
+                    <button
+                      class="btn btn-outline-success"
+                      class="btn btn-small"
+                      id="submit-answer"
+                      type="submit"
+                    >
+                      Submit
+                    </button>
+                  </form>
+                  <div
+                    class="active col-6 d-flex justify-content-center flex-column"
+                  >
+                    <p id="correct-answer" class="h5"></p>
+                    <p id="final-score"></p>
+                  </div>
+                </div>
+
+                <button class="btn btn-outline-primary" id="next" disabled>
+                  Next
+                </button>
+                <button class="btn btn-outline-primary" id="finish" disabled>
+                  Finish Game
+                </button>
+              </div>
+            </section>
+            <section class="card-body" id="buttons">
+              <div class="row">
+                <div class="col-7">
+                  <button class="btn btn-lg btn-primary" id="add-deck-btn">
+                    Add Deck
+                  </button>
+                  <button class="btn btn-lg btn-secondary" id="review-deck">
+                    Review Deck
+                  </button>
+                  <button class="btn btn-lg btn-success" id="start">
+                    Start Game
+                  </button>
+                </div>
+              </div>
+            </section>
           </div>
+          <!-- Deck Card -->
         </div>
-        <!-- Card Quiz -->
-        <div class="quiz active">
-          <h3>Quiz</h3>
-          <p id="quiz-word">English Word</p>
-          <form id="quiz-form" action="">
-            <div id="selections"></div>
-            <button class="btn btn-small" id="submit-answer" type="submit">
-              Submit
-            </button>
-          </form>
-          <button id="next" disabled>Next</button>
-          <button id="finish" disabled>Finish Game</button>
-        </div>
-        <div class="active">
-          <p id="correct-answer"></p>
-          <p id="final-score"></p>
-        </div>
-      </section>
-      <section id="buttons">
-        <div class="row">
-          <div class="col-7">
-            <button id="add-deck-btn">Add Deck</button>
-            <button class="btn" id="start">Start Game</button>
-            <button class="btn" id="stop">Stop Game</button>
-            <button class="btn" id="review-deck">Review Deck</button>
+        <section class="col-2" id="deck-info">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title h5 text-center">Cards in Deck</h3>
+              <h4 class="display-4 text-center" id="card-count">0</h4>
+            </div>
+            <div class="card-body d-grid gap-2 d-block">
+              <button class="btn btn-primary" id="reset">Reset Deck</button>
+            </div>
           </div>
-        </div>
-      </section>
-      <section id="deck-info">
-        <div>
-          <h3>Cards in Deck</h3>
-          <h4 id="card-count">0</h4>
-        </div>
-        <div>
-          <button id="reset">Reset Deck</button>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
