@@ -1,4 +1,5 @@
-const deck = [
+let deck = [];
+const seedData = [
   {
     english: "Hello",
     translated: "Hola",
@@ -16,6 +17,8 @@ const deck = [
     translated: "La Playa",
   },
 ];
+deck = seedData;
+
 const cardCount = document.querySelector("#card-count");
 const deckForm = document.querySelector("#deck-form");
 const finishDeckBtn = document.querySelector("#finish-deck");
@@ -38,6 +41,7 @@ const finishGameBtn = document.querySelector("#finish");
 const submitBtn = document.querySelector("#quiz-form button[type=submit]");
 const correctAnswer = document.querySelector("#correct-answer");
 const finalScore = document.querySelector("#final-score");
+const mobileDeckDisplay = document.querySelector("#mobile-deck");
 let reviewCardIdx = 2;
 let cardIdx = [];
 let currentCard;
@@ -56,8 +60,13 @@ deckForm.addEventListener("submit", function (e) {
   translatedInput.value = "";
   console.log(newCard);
   deck.push(newCard);
+  reviewDeckBtn.disabled = false;
+  if (deck.length >= 3) {
+    startGamebtn.disabled = false;
+  }
   console.log(deck);
   cardCount.textContent = deck.length;
+  mobileDeckDisplay.textContent = deck.length;
 });
 
 // finishDeckBtn.addEventListener("click", function () {
@@ -91,9 +100,11 @@ reviewNextBtn.addEventListener("click", function () {
 startGamebtn.addEventListener("click", function () {
   addDeckCard.classList.remove("active");
   reviewCard.classList.remove("active");
+  startingCard.classList.remove("active");
   quizCard.classList.add("active");
   cardIdx = [];
   score = 0;
+  submitBtn.disabled = false;
   correctAnswer.textContent = "";
   finalScore.textContent = "";
   const oldSelections = document.querySelectorAll("#selections div");
@@ -122,7 +133,7 @@ quizForm.addEventListener("submit", function (e) {
   submitBtn.disabled = true;
   if (cardIdx.length === deck.length) {
     nextBtn.disabled = true;
-    finishGameBtn.disabled = false;
+    finishGameBtn.classList.remove("d-none");
   } else {
     nextBtn.disabled = false;
   }
@@ -165,11 +176,15 @@ function createSections() {
 
     choiceLabel.setAttribute("for", `choice--${i}`);
     choiceLabel.textContent = `${answer}`;
+    choiceLabel.classList.add("form-check-label");
 
     choice.setAttribute("type", "radio");
     choice.setAttribute("value", answer);
     choice.setAttribute("name", "multiple-choice");
     choice.setAttribute("id", `choice--${i}`);
+    choice.classList.add("form-check-input");
+
+    radioGroup.classList.add("form-check");
 
     selections.appendChild(radioGroup);
     radioGroup.appendChild(choice);
