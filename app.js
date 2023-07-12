@@ -1,24 +1,4 @@
 let deck = [];
-const seedData = [
-  {
-    english: "Hello",
-    translated: "Hola",
-  },
-  {
-    english: "Dog",
-    translated: "El Perro",
-  },
-  {
-    english: "Weather",
-    translated: "El Tiempo",
-  },
-  {
-    english: "Beach",
-    translated: "La Playa",
-  },
-];
-deck = seedData;
-
 const cardCount = document.querySelector("#card-count");
 const deckForm = document.querySelector("#deck-form");
 const finishDeckBtn = document.querySelector("#finish-deck");
@@ -58,50 +38,40 @@ deckForm.addEventListener("submit", function (e) {
 
   englishInput.value = "";
   translatedInput.value = "";
-  console.log(newCard);
   deck.push(newCard);
   reviewDeckBtn.disabled = false;
   if (deck.length >= 3) {
     startGamebtn.disabled = false;
   }
-  console.log(deck);
   cardCount.textContent = deck.length;
   mobileDeckDisplay.textContent = deck.length;
 });
 
-// finishDeckBtn.addEventListener("click", function () {
-//   if (deck !== []) {
-//     displayReview();
-//   }
-// });
-
 addDeckBtn.addEventListener("click", () => {
-  addDeckCard.classList.add("active");
-  startingCard.classList.remove("active");
-  reviewCard.classList.remove("active");
-  quizCard.classList.remove("active");
+  displayActiveCard(addDeckCard, reviewCard, quizCard);
 });
 
 reviewDeckBtn.addEventListener("click", displayReview);
 reviewPrevBtn.addEventListener("click", function () {
   if (reviewCardIdx > 0) {
     reviewCardIdx--;
-    reviewEnglish.textContent = `${deck[reviewCardIdx].english}`;
-    reviewtranslated.textContent = `${deck[reviewCardIdx].translated}`;
+    displayReviewTerms(
+      deck[reviewCardIdx].english,
+      deck[reviewCardIdx].translated
+    );
   }
 });
 reviewNextBtn.addEventListener("click", function () {
   if (reviewCardIdx < deck.length - 1) {
     reviewCardIdx++;
-    reviewEnglish.textContent = `${deck[reviewCardIdx].english}`;
-    reviewtranslated.textContent = `${deck[reviewCardIdx].translated}`;
+    displayReviewTerms(
+      deck[reviewCardIdx].english,
+      deck[reviewCardIdx].translated
+    );
   }
 });
 startGamebtn.addEventListener("click", function () {
-  addDeckCard.classList.remove("active");
-  reviewCard.classList.remove("active");
-  startingCard.classList.remove("active");
-  quizCard.classList.add("active");
+  displayActiveCard(quizCard, reviewCard, addDeckCard);
   cardIdx = [];
   score = 0;
   submitBtn.disabled = false;
@@ -119,17 +89,15 @@ quizForm.addEventListener("submit", function (e) {
   const selectedChoice = document.querySelector(
     "input[name=multiple-choice]:checked"
   );
-  if (!selectedChoice) {
-    console.log("No choice Selected");
+
+  if (selectedChoice.value === currentCard.translated) {
+    correctAnswer.textContent = "Correct!";
+    score++;
   } else {
-    if (selectedChoice.value === currentCard.translated) {
-      correctAnswer.textContent = "Correct!";
-      score++;
-    } else {
-      console.log("Boo!");
-      correctAnswer.textContent = `Correct Answer: ${currentCard.translated}`;
-    }
+    console.log("Boo!");
+    correctAnswer.textContent = `Correct Answer: ${currentCard.translated}`;
   }
+
   submitBtn.disabled = true;
   if (cardIdx.length === deck.length) {
     nextBtn.disabled = true;
@@ -158,12 +126,9 @@ finishGameBtn.addEventListener("click", function () {
 });
 // Functions
 function displayReview() {
-  addDeckCard.classList.remove("active");
-  quizCard.classList.remove("active");
-  reviewCard.classList.add("active");
   reviewCardIdx = 0;
-  reviewEnglish.textContent = `${deck[0].english}`;
-  reviewtranslated.textContent = `${deck[0].translated}`;
+  displayActiveCard(reviewCard, addDeckCard, quizCard);
+  displayReviewTerms(deck[0].english, deck[0].translated);
 }
 
 function createSections() {
@@ -206,4 +171,15 @@ function createNewCard() {
   quizWord.textContent = currentCard.english;
 
   createSections();
+}
+
+function displayReviewTerms(englishTerm, translatedTerm) {
+  reviewEnglish.textContent = `${englishTerm}`;
+  reviewtranslated.textContent = `${translatedTerm}`;
+}
+function displayActiveCard(activeCard, inactiveCard1, inactiveCard2) {
+  startingCard.classList.remove("active");
+  activeCard.classList.add("active");
+  inactiveCard1.classList.remove("active");
+  inactiveCard2.classList.remove("active");
 }
